@@ -19,31 +19,37 @@ Update packages and install required dependencies:
 ```bash
 sudo apt update
 sudo apt install -y wget gnupg software-properties-common curl
-```bash
+```
 
 ---
 
 ## Install Terraform
 Add the HashiCorp GPG key:
 
+```bash
 wget -O - https://apt.releases.hashicorp.com/gpg | \
 sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg
+```
 
 ---
 
 ## Add the HashiCorp APT repository:
 
+```bash
 echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] \
 https://apt.releases.hashicorp.com \
 $(grep -oP '(?<=UBUNTU_CODENAME=).*' /etc/os-release || lsb_release -cs) \
 main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
+```
 
 ---
 
 ## Update APT and install Terraform:
 
+```bash
 sudo apt update
 sudo apt install -y terraform
+```
 
 ### Verify Installation
 terraform version
@@ -53,14 +59,21 @@ Terraform v1.x.x
 Optional: Install a Specific Version
 
 ### List available versions:
+```bash
 apt list -a terraform
+```
 
 ### Install a specific version:
+```bash
 sudo apt install terraform=1.6.6-1
+```
 
 ### Uninstall Terraform
+```bash
 sudo apt remove terraform
-Remove repository and key (optional):
-
+```
+### Remove repository and key (optional):
+```bash
 sudo rm /etc/apt/sources.list.d/hashicorp.list
 sudo rm /usr/share/keyrings/hashicorp-archive-keyring.gpg
+```
